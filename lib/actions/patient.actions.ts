@@ -17,6 +17,7 @@ import { parseStringify } from "../utils";
 
 // CREATE APPWRITE USER
 export const createUser = async (user: CreateUserParams) => {
+  console.log('creatUser')
   try {
     // Create new user -> https://appwrite.io/docs/references/1.5.x/server-nodejs/users#create
     const newuser = await users.create(
@@ -26,6 +27,7 @@ export const createUser = async (user: CreateUserParams) => {
       undefined,
       user.name
     );
+    console.log('tried')
 
     return parseStringify(newuser);
   } catch (error: any) {
@@ -43,8 +45,10 @@ export const createUser = async (user: CreateUserParams) => {
 
 // GET USER
 export const getUser = async (userId: string) => {
+  console.log(`trying to get this user with ${userId}`)
   try {
     const user = await users.get(userId);
+    console.log('getton user', user)
 
     return parseStringify(user);
   } catch (error) {
@@ -57,7 +61,7 @@ export const getUser = async (userId: string) => {
 
 // REGISTER PATIENT
 export const registerPatient = async ({
-  identificationDocument,
+ 
   ...patient
 }: RegisterUserParams) => {
   try {

@@ -39,10 +39,12 @@ import SubmitButton from "../SubmitButton";
         phone: values.phone,
       };
 
-      const newUser = await createUser(user);
-    
+      console.log(user)
 
-      if (newUser) {
+      const newUser = await createUser(user);
+      console.log("hello")
+      console.log(newUser)
+       if (newUser) {
         router.push(`/patients/${newUser.$id}/register`);
       }
     } catch (error) {

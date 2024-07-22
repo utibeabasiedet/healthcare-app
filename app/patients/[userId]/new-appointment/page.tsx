@@ -4,8 +4,14 @@ import { AppointmentForm } from "@/components/forms/AppointmentForm";
 import { getPatient } from "@/lib/actions/patient.actions";
 import { useEffect, useState } from "react";
 
-const Appointment = ({ params: { userId } }: SearchParamProps) => {
-  const [patient, setPatient] = useState(null);
+// Define the type for the patient object
+interface Patient {
+  $id: string;
+  // Add other properties of the patient object if needed
+}
+
+const Appointment = ({ params: { userId } }: { params: { userId: string } }) => {
+  const [patient, setPatient] = useState<Patient | null>(null);
 
   useEffect(() => {
     const fetchPatient = async () => {
@@ -31,7 +37,7 @@ const Appointment = ({ params: { userId } }: SearchParamProps) => {
 
           {patient && (
             <AppointmentForm
-              patientId={patient?.$id}
+              patientId={patient.$id}
               userId={userId}
               type="create"
             />

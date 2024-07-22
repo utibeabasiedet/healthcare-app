@@ -16,7 +16,7 @@ import {
   GenderOptions,
   IdentificationTypes,
   PatientFormDefaultValues,
-} from "../../constants/index.ts";
+} from "../../constants/index";
 import { registerPatient } from "@/lib/actions/patient.actions";
 // import { PatientFormValidation } from "@/lib/validation";
 
@@ -99,11 +99,16 @@ const RegisterForm = ({ user }: { user: User }) => {
     resolver: zodResolver(PatientFormValidation),
     defaultValues: {
       ...PatientFormDefaultValues,
-      name: user.name,
-      email: user.email,
-      phone: user.phone,
+      // name: user.name,
+      // email: user.email,
+      // phone: user.phone,
     },
   });
+  console.log({
+    name: user.name,
+      email: user.email,
+      phone: user.phone,
+  })
 
   const onSubmit = async (values: z.infer<typeof PatientFormValidation>) => {
     setIsLoading(true);
