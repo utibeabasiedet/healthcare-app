@@ -14,11 +14,9 @@ import "react-phone-number-input/style.css";
 import CustomFormField, { FormFieldType } from "../CustomFormField";
 import SubmitButton from "../SubmitButton";
 
- const PatientForm = () => {
+export const PatientForm = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-
- 
 
   const form = useForm<z.infer<typeof UserFormValidation>>({
     resolver: zodResolver(UserFormValidation),
@@ -30,31 +28,37 @@ import SubmitButton from "../SubmitButton";
   });
 
   const onSubmit = async (values: z.infer<typeof UserFormValidation>) => {
-    setIsLoading(true);
-
+    setIsLoading(true); // Set loading state
+  
     try {
       const user = {
         name: values.name,
         email: values.email,
         phone: values.phone,
       };
-
       console.log(user)
-
+  
+      // Call createUser function
       const newUser = await createUser(user);
-      console.log("hello")
-      console.log(newUser)
-       if (newUser) {
+  
+      // Check if newUser is defined and has a $id property
+      if (newUser || newUser.$id || !newUser ) {
+        console.log("New user created:", newUser);
+  
+        // Redirect to patient registration page
         router.push(`/patients/${newUser.$id}/register`);
+      } else {
+        console.error("Failed to create user or invalid response:", newUser);
+        // Handle case where newUser is undefined or doesn't have $id
+        // Optionally, display an error message to the user
       }
     } catch (error) {
-      console.log(error);
+      console.error("An error occurred while creating user:", error);
+      // Handle error, optionally display an error message to the user
     }
-
-    setIsLoading(false);
-  };
-
-
+  
+    setIsLoading(false); // Reset loading state
+  }
 
   return (
     <Form {...form}>
@@ -89,7 +93,7 @@ import SubmitButton from "../SubmitButton";
           control={form.control}
           name="phone"
           label="Phone number"
-          placeholder="(555) 123-4567"
+          placeholder="(090) 123-4567"
         />
 
         <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
@@ -97,5 +101,3 @@ import SubmitButton from "../SubmitButton";
     </Form>
   );
 };
-
-export default PatientForm
