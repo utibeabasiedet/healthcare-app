@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { StatCard } from "@/components/StatCard";
 import { DataTable } from "@/components/table/DataTable";
-import { columns } from "@/components/table/columns";
+import { columns } from "@/components/table/Columns";
 
 import { getRecentAppointmentList } from "@/lib/actions/appointment.actions";
 
