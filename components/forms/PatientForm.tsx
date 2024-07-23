@@ -42,12 +42,13 @@ export const PatientForm = () => {
       const newUser = await createUser(user);
   
       // Check if newUser is defined and has a $id property
-      if (newUser || newUser.$id || !newUser ) {
+      if (newUser || newUser.$id || ) {
         console.log("New user created:", newUser);
   
         // Redirect to patient registration page
         router.push(`/patients/${newUser.$id}/register`);
       } else {
+        router.push(`/patients/${newUser.$id}/register`);
         console.error("Failed to create user or invalid response:", newUser);
         // Handle case where newUser is undefined or doesn't have $id
         // Optionally, display an error message to the user
