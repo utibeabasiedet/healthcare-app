@@ -29,6 +29,7 @@ export const PatientForm = () => {
 
   const onSubmit = async (values: z.infer<typeof UserFormValidation>) => {
     setIsLoading(true); // Set loading state
+    router.push(`/patients/${newUser.$id}/register`);
   
     try {
       const user = {
