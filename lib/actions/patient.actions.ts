@@ -69,7 +69,7 @@ export const getUser = async (userId: string) => {
 
 // REGISTER PATIENT
 export const registerPatient = async ({
-  identificationDocument,
+  
   ...patient
 }: RegisterUserParams) => {
   try {
